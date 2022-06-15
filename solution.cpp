@@ -18,10 +18,14 @@ using namespace std;
   - pay attention to the subtle difference in
     implementation between isSubtree and _isSameTree
     for the edge cases
+  - Time complexity: O(max(n, m))
 */
 
 bool Solution::isSubtree(Node *s, Node *t)
 {
+  /* an empty tree is a subtree of any tree including
+     an empty tree
+  */
   if (t == nullptr)
     return true;
 
@@ -29,8 +33,13 @@ bool Solution::isSubtree(Node *s, Node *t)
   if (s == nullptr)
     return false;
 
+  /* if s->val == t->val we will recursively
+     check if two trees are the same
+  */
   if (_isSameTree(s, t))
     return true;
+  /* check either child to see if t is a subtree of
+   */
   else
     return isSubtree(s->left, t) || isSubtree(s->right, t);
 }
